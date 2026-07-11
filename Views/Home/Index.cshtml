@@ -1,8 +1,74 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model CyberWatchAnalytics.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Panel Principal";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid">
+
+    <h2 class="mb-4">Panel Principal</h2>
+
+    <div class="row">
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Usuarios</h5>
+                    <h2>@Model.TotalUsuarios</h2>
+                    <p class="text-muted">Registrados</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Activos</h5>
+                    <h2>@Model.TotalActivos</h2>
+                    <p class="text-muted">Tecnológicos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Incidentes</h5>
+                    <h2>@Model.TotalIncidentes</h2>
+                    <p class="text-muted">Registrados</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Vulnerabilidades</h5>
+                    <h2>@Model.TotalVulnerabilidades</h2>
+                    <p class="text-muted">Detectadas</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-header">
+            <strong>Bienvenido a CyberWatch Analytics</strong>
+        </div>
+
+        <div class="card-body">
+            <p>
+                Este sistema permite administrar usuarios, activos tecnológicos,
+                incidentes de seguridad, vulnerabilidades y reportes de una
+                organización, proporcionando una plataforma centralizada para
+                apoyar la gestión de la seguridad informática.
+            </p>
+
+            <p class="mb-0">
+                Utilice el menú lateral para acceder a los distintos módulos del sistema.
+            </p>
+        </div>
+    </div>
+
 </div>

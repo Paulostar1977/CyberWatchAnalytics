@@ -1,22 +1,122 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+}
+
+/* ===========================
+   Menú lateral
+=========================== */
+
+.sidebar {
+    width: 250px;
+    background-color: #1f2937;
+    color: white;
+    min-height: 100vh;
+}
+
+.sidebar-title {
+    padding: 25px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 1px solid #374151;
+}
+
+.sidebar-title span {
+    color: #60a5fa;
+}
+
+.sidebar-menu {
+    margin-top: 20px;
+}
+
+.sidebar-menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 14px 22px;
+    transition: 0.3s;
+}
+
+.sidebar-menu a:hover {
+    background-color: #374151;
+    color: #60a5fa;
+}
+
+/* ===========================
+   Encabezado
+=========================== */
+
+.topbar {
+    background: white;
+    padding: 18px 30px;
+    border-bottom: 1px solid #dee2e6;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ===========================
+   Contenido
+=========================== */
+
+.content-wrapper {
+    padding: 30px;
+}
+
+/* ===========================
+   Pantalla de inicio de sesión
+=========================== */
+
+.login-page {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #eef2f7;
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.login-title {
+    margin-bottom: 0;
+    color: #1f2937;
+    font-weight: 700;
+}
+
+.login-subtitle {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.login-card .form-control {
+    padding: 11px 12px;
+}
+
+.login-card .btn-primary {
+    padding: 11px;
 }
