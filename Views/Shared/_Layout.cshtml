@@ -19,9 +19,13 @@
 
             <nav class="sidebar-menu">
                 <a asp-controller="Home" asp-action="Index">Dashboard</a>
-                <a href="#">Usuarios</a>
-                <a href="#">Activos Tecnológicos</a>
-                <a href="#">Incidentes</a>
+                <a asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                <a asp-controller="Activos" asp-action="Index">
+                    Activos Tecnológicos
+                    </a>
+                <a asp-controller="Incidentes" asp-action="Index">
+                    Incidentes
+                </a>
                 <a href="#">Vulnerabilidades</a>
                 <a href="#">Reportes</a>
             </nav>

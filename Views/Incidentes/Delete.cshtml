@@ -1,0 +1,70 @@
+@model CyberWatchAnalytics.Models.IncidentesSeguridad
+
+@{
+    ViewData["Title"] = "Eliminar Incidente";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Eliminar Incidente de Seguridad</h2>
+            <p class="text-muted mb-0">
+                Confirme la eliminación del incidente seleccionado.
+            </p>
+        </div>
+
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            Volver
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+            <div class="alert alert-warning">
+                Esta acción eliminará permanentemente el incidente del sistema.
+            </div>
+
+            <dl class="row mb-4">
+
+                <dt class="col-sm-3">Título</dt>
+                <dd class="col-sm-9">@Model.Titulo</dd>
+
+                <dt class="col-sm-3">Activo tecnológico</dt>
+                <dd class="col-sm-9">
+                    @Model.IdActivoNavigation.NombreActivo
+                </dd>
+
+                <dt class="col-sm-3">Descripción</dt>
+                <dd class="col-sm-9">@Model.Descripcion</dd>
+
+                <dt class="col-sm-3">Criticidad</dt>
+                <dd class="col-sm-9">@Model.Criticidad</dd>
+
+                <dt class="col-sm-3">Estado</dt>
+                <dd class="col-sm-9">@Model.Estado</dd>
+
+                <dt class="col-sm-3">Fecha de registro</dt>
+                <dd class="col-sm-9">
+                    @Model.FechaRegistro.ToString("dd-MM-yyyy")
+                </dd>
+
+            </dl>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="IdIncidente" />
+
+                <button type="submit" class="btn btn-danger">
+                    Confirmar eliminación
+                </button>
+
+                <a asp-action="Index" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </form>
+
+        </div>
+    </div>
+
+</div>

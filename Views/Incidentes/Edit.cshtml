@@ -1,0 +1,113 @@
+@model CyberWatchAnalytics.ViewModels.IncidenteEditViewModel
+
+@{
+    ViewData["Title"] = "Editar Incidente";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Editar Incidente de Seguridad</h2>
+            <p class="text-muted mb-0">
+                Modifique la información del incidente seleccionado.
+            </p>
+        </div>
+
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            Volver
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+            <form asp-action="Edit" method="post">
+                <input asp-for="IdIncidente" type="hidden" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3"></div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Titulo" class="form-label"></label>
+                        <input asp-for="Titulo" class="form-control" />
+                        <span asp-validation-for="Titulo"
+                              class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="IdActivo" class="form-label"></label>
+
+                        <select asp-for="IdActivo"
+                                asp-items="Model.Activos"
+                                class="form-select">
+                            <option value="">Seleccione...</option>
+                        </select>
+
+                        <span asp-validation-for="IdActivo"
+                              class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Descripcion" class="form-label"></label>
+
+                    <textarea asp-for="Descripcion"
+                              class="form-control"
+                              rows="4"></textarea>
+
+                    <span asp-validation-for="Descripcion"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Criticidad" class="form-label"></label>
+
+                        <select asp-for="Criticidad" class="form-select">
+                            <option value="Baja">Baja</option>
+                            <option value="Media">Media</option>
+                            <option value="Alta">Alta</option>
+                            <option value="Crítica">Crítica</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Estado" class="form-label"></label>
+
+                        <select asp-for="Estado" class="form-select">
+                            <option value="Abierto">Abierto</option>
+                            <option value="En análisis">En análisis</option>
+                            <option value="Resuelto">Resuelto</option>
+                            <option value="Cerrado">Cerrado</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <button type="submit" class="btn btn-primary">
+                    Guardar Cambios
+                </button>
+
+                <a asp-action="Index" class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

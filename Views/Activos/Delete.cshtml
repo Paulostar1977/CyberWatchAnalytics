@@ -1,0 +1,76 @@
+@model CyberWatchAnalytics.Models.ActivosTecnologico
+
+@{
+    ViewData["Title"] = "Eliminar Activo";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Eliminar Activo Tecnológico</h2>
+            <p class="text-muted mb-0">
+                Confirme la eliminación del activo seleccionado.
+            </p>
+        </div>
+
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            Volver
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+            <div class="alert alert-warning">
+                Esta acción eliminará permanentemente el activo del sistema.
+            </div>
+
+            <dl class="row mb-4">
+                <dt class="col-sm-3">Nombre</dt>
+                <dd class="col-sm-9">@Model.NombreActivo</dd>
+
+                <dt class="col-sm-3">Dirección IP</dt>
+                <dd class="col-sm-9">
+                    @(string.IsNullOrWhiteSpace(Model.DireccionIp)
+                        ? "Sin asignar"
+                        : Model.DireccionIp)
+                </dd>
+
+                <dt class="col-sm-3">Tipo</dt>
+                <dd class="col-sm-9">
+                    @Model.IdTipoActivoNavigation.NombreTipo
+                </dd>
+
+                <dt class="col-sm-3">Ubicación</dt>
+                <dd class="col-sm-9">
+                    @(string.IsNullOrWhiteSpace(Model.Ubicacion)
+                        ? "Sin especificar"
+                        : Model.Ubicacion)
+                </dd>
+
+                <dt class="col-sm-3">Estado</dt>
+                <dd class="col-sm-9">@Model.Estado</dd>
+
+                <dt class="col-sm-3">Fecha de registro</dt>
+                <dd class="col-sm-9">
+                    @Model.FechaRegistro.ToString("dd-MM-yyyy")
+                </dd>
+            </dl>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="IdActivo" />
+
+                <button type="submit" class="btn btn-danger">
+                    Confirmar eliminación
+                </button>
+
+                <a asp-action="Index" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </form>
+
+        </div>
+    </div>
+
+</div>
