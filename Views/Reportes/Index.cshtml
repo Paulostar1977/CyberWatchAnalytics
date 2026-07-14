@@ -1,0 +1,214 @@
+@model CyberWatchAnalytics.ViewModels.ReporteGeneralViewModel
+
+@{
+    ViewData["Title"] = "Reportes";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Reporte General del Sistema</h2>
+            <p class="text-muted mb-0">
+                Resumen consolidado de los principales registros de CyberWatch Analytics.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Usuarios</h5>
+                    <h2>@Model.TotalUsuarios</h2>
+                    <p class="text-muted mb-0">Registrados</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Activos</h5>
+                    <h2>@Model.TotalActivos</h2>
+                    <p class="text-muted mb-0">Tecnológicos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Incidentes</h5>
+                    <h2>@Model.TotalIncidentes</h2>
+                    <p class="text-muted mb-0">Registrados</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Vulnerabilidades</h5>
+                    <h2>@Model.TotalVulnerabilidades</h2>
+                    <p class="text-muted mb-0">Detectadas</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-white">
+            <strong>Últimos incidentes registrados</strong>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Título</th>
+                            <th>Activo</th>
+                            <th>Criticidad</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model.UltimosIncidentes.Any())
+                        {
+                            @foreach (var incidente in Model.UltimosIncidentes)
+                            {
+                                <tr>
+                                    <td>@incidente.Titulo</td>
+                                    <td>@incidente.IdActivoNavigation.NombreActivo</td>
+                                    <td>@incidente.Criticidad</td>
+                                    <td>@incidente.Estado</td>
+                                    <td>@incidente.FechaRegistro.ToString("dd-MM-yyyy")</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">
+                                    No existen incidentes registrados.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-white">
+            <strong>Últimas vulnerabilidades detectadas</strong>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Activo</th>
+                            <th>Descripción</th>
+                            <th>Severidad</th>
+                            <th>Estado de mitigación</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model.UltimasVulnerabilidades.Any())
+                        {
+                            @foreach (var vulnerabilidad in Model.UltimasVulnerabilidades)
+                            {
+                                <tr>
+                                    <td>@vulnerabilidad.IdActivoNavigation.NombreActivo</td>
+                                    <td>@vulnerabilidad.Descripcion</td>
+                                    <td>@vulnerabilidad.Severidad</td>
+                                    <td>@vulnerabilidad.EstadoMitigacion</td>
+                                    <td>@vulnerabilidad.FechaDeteccion.ToString("dd-MM-yyyy")</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">
+                                    No existen vulnerabilidades registradas.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white">
+            <strong>Activos tecnológicos registrados</strong>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Dirección IP</th>
+                            <th>Ubicación</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model.ActivosRegistrados.Any())
+                        {
+                            @foreach (var activo in Model.ActivosRegistrados)
+                            {
+                                <tr>
+                                    <td>@activo.NombreActivo</td>
+                                    <td>@activo.IdTipoActivoNavigation.NombreTipo</td>
+                                    <td>
+                                        @(string.IsNullOrWhiteSpace(activo.DireccionIp)
+                                            ? "Sin asignar"
+                                            : activo.DireccionIp)
+                                    </td>
+                                    <td>
+                                        @(string.IsNullOrWhiteSpace(activo.Ubicacion)
+                                            ? "Sin especificar"
+                                            : activo.Ubicacion)
+                                    </td>
+                                    <td>@activo.Estado</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">
+                                    No existen activos tecnológicos registrados.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>

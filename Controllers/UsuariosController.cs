@@ -36,6 +36,14 @@ public class UsuariosController : Controller
             return RedirectToAction("Login", "Account");
         }
 
+        if (!EsAdministrador())
+        {
+            TempData["MensajeError"] =
+                "No tiene permisos para acceder a la administración de usuarios.";
+
+            return RedirectToAction("Index", "Home");
+        }
+
         var usuarios = await _context.Usuarios
             .Include(u => u.IdRolNavigation)
             .OrderBy(u => u.Nombre)
@@ -54,6 +62,11 @@ public class UsuariosController : Controller
         if (!UsuarioAutenticado())
         {
             return RedirectToAction("Login", "Account");
+        }
+
+        if (!EsAdministrador())
+        {
+            return RedirectToAction("Index", "Home");
         }
 
         var model = new UsuarioCreateViewModel
@@ -75,6 +88,11 @@ public class UsuariosController : Controller
         if (!UsuarioAutenticado())
         {
             return RedirectToAction("Login", "Account");
+        }
+
+        if (!EsAdministrador())
+        {
+            return RedirectToAction("Index", "Home");
         }
 
         if (await _context.Usuarios.AnyAsync(u => u.Correo == model.Correo))
@@ -121,6 +139,11 @@ public class UsuariosController : Controller
             return RedirectToAction("Login", "Account");
         }
 
+        if (!EsAdministrador())
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         if (id == null)
         {
             return NotFound();
@@ -157,6 +180,11 @@ public class UsuariosController : Controller
         if (!UsuarioAutenticado())
         {
             return RedirectToAction("Login", "Account");
+        }
+
+        if (!EsAdministrador())
+        {
+            return RedirectToAction("Index", "Home");
         }
 
         var usuario = await _context.Usuarios.FindAsync(model.IdUsuario);
@@ -213,6 +241,11 @@ public class UsuariosController : Controller
             return RedirectToAction("Login", "Account");
         }
 
+        if (!EsAdministrador())
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         if (id == null)
         {
             return NotFound();
@@ -241,6 +274,11 @@ public class UsuariosController : Controller
         if (!UsuarioAutenticado())
         {
             return RedirectToAction("Login", "Account");
+        }
+
+        if (!EsAdministrador())
+        {
+            return RedirectToAction("Index", "Home");
         }
 
         int? idUsuarioSesion =
@@ -277,6 +315,11 @@ public class UsuariosController : Controller
     private bool UsuarioAutenticado()
     {
         return HttpContext.Session.GetInt32("IdUsuario") != null;
+    }
+
+    private bool EsAdministrador()
+    {
+        return HttpContext.Session.GetString("RolUsuario") == "Administrador";
     }
 
     private async Task<List<SelectListItem>> ObtenerRolesAsync()
