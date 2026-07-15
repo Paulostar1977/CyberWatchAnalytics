@@ -10,6 +10,7 @@
 using CyberWatchAnalytics.Data;
 using CyberWatchAnalytics.Models;
 using CyberWatchAnalytics.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +20,12 @@ namespace CyberWatchAnalytics.Controllers;
 public class UsuariosController : Controller
 {
     private readonly CyberWatchDbContext _context;
+    private readonly PasswordHasher<Usuario> _passwordHasher;
 
     public UsuariosController(CyberWatchDbContext context)
     {
         _context = context;
+        _passwordHasher = new PasswordHasher<Usuario>();
     }
 
     //======================================================================
@@ -95,7 +98,12 @@ public class UsuariosController : Controller
             return RedirectToAction("Index", "Home");
         }
 
-        if (await _context.Usuarios.AnyAsync(u => u.Correo == model.Correo))
+        string correoNormalizado = model.Correo.Trim().ToLower();
+
+        bool correoExiste = await _context.Usuarios
+            .AnyAsync(u => u.Correo.ToLower() == correoNormalizado);
+
+        if (correoExiste)
         {
             ModelState.AddModelError(
                 nameof(model.Correo),
@@ -111,12 +119,16 @@ public class UsuariosController : Controller
         var usuario = new Usuario
         {
             Nombre = model.Nombre.Trim(),
-            Correo = model.Correo.Trim(),
-            PasswordHash = model.Password,
+            Correo = correoNormalizado,
             IdRol = model.IdRol,
             Estado = model.Estado,
-            FechaCreacion = DateTime.Now
+            FechaCreacion = DateTime.Now,
+            PasswordHash = string.Empty
         };
+
+        usuario.PasswordHash = _passwordHasher.HashPassword(
+            usuario,
+            model.Password);
 
         _context.Usuarios.Add(usuario);
         await _context.SaveChangesAsync();
@@ -194,8 +206,10 @@ public class UsuariosController : Controller
             return NotFound();
         }
 
+        string correoNormalizado = model.Correo.Trim().ToLower();
+
         bool correoDuplicado = await _context.Usuarios.AnyAsync(u =>
-            u.Correo == model.Correo &&
+            u.Correo.ToLower() == correoNormalizado &&
             u.IdUsuario != model.IdUsuario);
 
         if (correoDuplicado)
@@ -212,13 +226,20 @@ public class UsuariosController : Controller
         }
 
         usuario.Nombre = model.Nombre.Trim();
-        usuario.Correo = model.Correo.Trim();
+        usuario.Correo = correoNormalizado;
         usuario.IdRol = model.IdRol;
         usuario.Estado = model.Estado;
 
+        /*
+         * La contraseña solamente se modifica cuando el administrador
+         * escribe una nueva. Si el campo queda vacío, se conserva el hash
+         * almacenado actualmente.
+         */
         if (!string.IsNullOrWhiteSpace(model.Password))
         {
-            usuario.PasswordHash = model.Password;
+            usuario.PasswordHash = _passwordHasher.HashPassword(
+                usuario,
+                model.Password);
         }
 
         await _context.SaveChangesAsync();

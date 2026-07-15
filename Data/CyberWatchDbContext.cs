@@ -94,11 +94,26 @@ public partial class CyberWatchDbContext : DbContext
 
             entity.ToTable("IncidentesSeguridad");
 
-            entity.Property(e => e.Criticidad).HasMaxLength(20).IsUnicode(false);
-            entity.Property(e => e.Descripcion).HasMaxLength(255).IsUnicode(false);
-            entity.Property(e => e.Estado).HasMaxLength(30).IsUnicode(false).HasDefaultValue("Abierto");
-            entity.Property(e => e.FechaRegistro).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
-            entity.Property(e => e.Titulo).HasMaxLength(120).IsUnicode(false);
+            entity.Property(e => e.Criticidad)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
+            entity.Property(e => e.Descripcion)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+
+            entity.Property(e => e.Estado)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasDefaultValue("Abierto");
+
+            entity.Property(e => e.FechaRegistro)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.Property(e => e.Titulo)
+                .HasMaxLength(120)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.IdActivoNavigation)
                 .WithMany(p => p.IncidentesSeguridads)
@@ -130,8 +145,13 @@ public partial class CyberWatchDbContext : DbContext
         {
             entity.HasKey(e => e.IdRol);
 
-            entity.Property(e => e.Descripcion).HasMaxLength(150).IsUnicode(false);
-            entity.Property(e => e.NombreRol).HasMaxLength(50).IsUnicode(false);
+            entity.Property(e => e.Descripcion)
+                .HasMaxLength(150)
+                .IsUnicode(false);
+
+            entity.Property(e => e.NombreRol)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<TiposActivo>(entity =>
@@ -140,8 +160,13 @@ public partial class CyberWatchDbContext : DbContext
 
             entity.ToTable("TiposActivo");
 
-            entity.Property(e => e.Descripcion).HasMaxLength(150).IsUnicode(false);
-            entity.Property(e => e.NombreTipo).HasMaxLength(80).IsUnicode(false);
+            entity.Property(e => e.Descripcion)
+                .HasMaxLength(150)
+                .IsUnicode(false);
+
+            entity.Property(e => e.NombreTipo)
+                .HasMaxLength(80)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Usuario>(entity =>
@@ -150,11 +175,33 @@ public partial class CyberWatchDbContext : DbContext
 
             entity.HasIndex(e => e.Correo).IsUnique();
 
-            entity.Property(e => e.Correo).HasMaxLength(150).IsUnicode(false);
-            entity.Property(e => e.Estado).HasMaxLength(20).IsUnicode(false).HasDefaultValue("Activo");
-            entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
-            entity.Property(e => e.Nombre).HasMaxLength(100).IsUnicode(false);
-            entity.Property(e => e.PasswordHash).HasMaxLength(255).IsUnicode(false);
+            entity.Property(e => e.CodigoRecuperacion)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            entity.Property(e => e.Correo)
+                .HasMaxLength(150)
+                .IsUnicode(false);
+
+            entity.Property(e => e.Estado)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValue("Activo");
+
+            entity.Property(e => e.FechaCreacion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.Property(e => e.FechaExpiracionCodigo)
+                .HasColumnType("datetime");
+
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            entity.Property(e => e.PasswordHash)
+                .HasMaxLength(255)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.IdRolNavigation)
                 .WithMany(p => p.Usuarios)
@@ -167,10 +214,22 @@ public partial class CyberWatchDbContext : DbContext
         {
             entity.HasKey(e => e.IdVulnerabilidad);
 
-            entity.Property(e => e.Descripcion).HasMaxLength(255).IsUnicode(false);
-            entity.Property(e => e.EstadoMitigacion).HasMaxLength(30).IsUnicode(false).HasDefaultValue("Pendiente");
-            entity.Property(e => e.FechaDeteccion).HasDefaultValueSql("(getdate())").HasColumnType("datetime");
-            entity.Property(e => e.Severidad).HasMaxLength(20).IsUnicode(false);
+            entity.Property(e => e.Descripcion)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+
+            entity.Property(e => e.EstadoMitigacion)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasDefaultValue("Pendiente");
+
+            entity.Property(e => e.FechaDeteccion)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.Property(e => e.Severidad)
+                .HasMaxLength(20)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.IdActivoNavigation)
                 .WithMany(p => p.Vulnerabilidades)

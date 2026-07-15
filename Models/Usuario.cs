@@ -18,9 +18,10 @@ public partial class Usuario
 
     // Información básica del usuario
     public string Nombre { get; set; } = null!;
+
     public string Correo { get; set; } = null!;
 
-    // Contraseña (temporalmente almacenada en texto para el proyecto)
+    // Hash seguro de la contraseña del usuario
     public string PasswordHash { get; set; } = null!;
 
     // Estado del usuario (Activo / Inactivo)
@@ -28,6 +29,12 @@ public partial class Usuario
 
     // Fecha de creación del registro
     public DateTime FechaCreacion { get; set; }
+
+    // Código temporal utilizado para recuperar la contraseña
+    public string? CodigoRecuperacion { get; set; }
+
+    // Fecha y hora de vencimiento del código de recuperación
+    public DateTime? FechaExpiracionCodigo { get; set; }
 
     // Relaciones con otras entidades
     public virtual Rol IdRolNavigation { get; set; } = null!;
