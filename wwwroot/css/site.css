@@ -1,36 +1,94 @@
+/* ==========================================================
+   CONFIGURACIÓN GENERAL
+========================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-size: 14px;
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
 body {
     margin: 0;
+    min-height: 100vh;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #111827;
     background-color: #f4f6f9;
 }
 
-/* ===========================
-   Menú lateral
-=========================== */
+a {
+    color: #2563eb;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+/* ==========================================================
+   ESTRUCTURA PRINCIPAL
+========================================================== */
+
+.d-flex {
+    display: flex;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.gap-3 {
+    gap: 1rem;
+}
+
+.main-content {
+    min-width: 0;
+    width: calc(100% - 250px);
+}
+
+/* ==========================================================
+   MENÚ LATERAL
+========================================================== */
 
 .sidebar {
     width: 250px;
-    background-color: #1f2937;
-    color: white;
+    flex-shrink: 0;
     min-height: 100vh;
+    color: white;
+    background-color: #1f2937;
 }
 
 .sidebar-title {
     padding: 25px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
     border-bottom: 1px solid #374151;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
 }
 
 .sidebar-title span {
@@ -43,63 +101,425 @@ body {
 
 .sidebar-menu a {
     display: block;
+    padding: 14px 22px;
     color: white;
     text-decoration: none;
-    padding: 14px 22px;
-    transition: 0.3s;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .sidebar-menu a:hover {
-    background-color: #374151;
     color: #60a5fa;
+    background-color: #374151;
 }
 
-/* ===========================
-   Encabezado
-=========================== */
+/* ==========================================================
+   ENCABEZADO
+========================================================== */
 
 .topbar {
-    background: white;
-    padding: 18px 30px;
-    border-bottom: 1px solid #dee2e6;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 76px;
+    padding: 18px 30px;
+    border-bottom: 1px solid #dee2e6;
+    background-color: white;
 }
 
-/* ===========================
-   Contenido
-=========================== */
+/* ==========================================================
+   CONTENIDO
+========================================================== */
 
 .content-wrapper {
     padding: 30px;
 }
 
-/* ===========================
-   Pantalla de inicio de sesión
-=========================== */
+.container-fluid {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+.col-md-3,
+.col-md-6,
+.col-lg-6 {
+    width: 100%;
+    padding: 10px;
+}
+
+/* ==========================================================
+   TARJETAS
+========================================================== */
+
+.card {
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid #d9dee5;
+    border-radius: 8px;
+}
+
+.card-header {
+    padding: 14px 16px;
+    font-weight: 600;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #d9dee5;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.shadow,
+.shadow-sm {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.border-0 {
+    border: 0;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+/* ==========================================================
+   FORMULARIOS
+========================================================== */
+
+.form-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.form-control,
+.form-select {
+    display: block;
+    width: 100%;
+    min-height: 40px;
+    padding: 10px 12px;
+    color: #111827;
+    background-color: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.text-danger,
+.field-validation-error {
+    display: block;
+    margin-top: 5px;
+    color: #dc2626;
+    font-size: 0.875rem;
+}
+
+/* ==========================================================
+   BOTONES
+========================================================== */
+
+.btn {
+    display: inline-block;
+    padding: 9px 15px;
+    color: #111827;
+    line-height: 1.3;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #e5e7eb;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+.btn-primary {
+    color: white;
+    background-color: #2563eb;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-secondary {
+    color: white;
+    background-color: #6b7280;
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+.btn-danger {
+    color: white;
+    background-color: #dc2626;
+}
+
+.btn-danger:hover {
+    background-color: #b91c1c;
+}
+
+.btn-outline-primary {
+    color: #2563eb;
+    background-color: transparent;
+    border-color: #2563eb;
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    background-color: #2563eb;
+}
+
+.btn-outline-danger {
+    color: #dc2626;
+    background-color: transparent;
+    border-color: #dc2626;
+}
+
+.btn-outline-danger:hover {
+    color: white;
+    background-color: #dc2626;
+}
+
+.btn-outline-secondary {
+    color: #6b7280;
+    background-color: white;
+    border-color: #6b7280;
+}
+
+.btn-outline-secondary:hover {
+    color: white;
+    background-color: #6b7280;
+}
+
+.btn-sm {
+    padding: 6px 10px;
+    font-size: 0.875rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* ==========================================================
+   TABLAS
+========================================================== */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #d9dee5;
+}
+
+.table th {
+    font-weight: 700;
+    color: #111827;
+}
+
+.table-light th {
+    background-color: #f5f6f7;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8fbff;
+}
+
+.align-middle th,
+.align-middle td {
+    vertical-align: middle;
+}
+
+/* ==========================================================
+   ALERTAS
+========================================================== */
+
+.alert {
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.alert-success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+}
+
+.alert-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+
+.alert-warning {
+    color: #664d03;
+    background-color: #fff3cd;
+    border-color: #ffecb5;
+}
+
+/* ==========================================================
+   ETIQUETAS DE ESTADO
+========================================================== */
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.bg-success {
+    color: white;
+    background-color: #198754;
+}
+
+.bg-danger {
+    color: white;
+    background-color: #dc3545;
+}
+
+.bg-warning {
+    color: #111827;
+    background-color: #ffc107;
+}
+
+.bg-primary {
+    color: white;
+    background-color: #2563eb;
+}
+
+.bg-secondary {
+    color: white;
+    background-color: #6b7280;
+}
+
+/* ==========================================================
+   TEXTOS Y UTILIDADES
+========================================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.text-end {
+    text-align: right;
+}
+
+.text-muted {
+    color: #6b7280;
+}
+
+.text-dark {
+    color: #111827;
+}
+
+.fw-semibold {
+    font-weight: 600;
+}
+
+.small {
+    font-size: 0.875rem;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.pb-3 {
+    padding-bottom: 1rem;
+}
+
+/* ==========================================================
+   LISTAS DE DETALLE
+========================================================== */
+
+dl.row {
+    margin: 0;
+}
+
+dt {
+    font-weight: 700;
+}
+
+dd {
+    margin-left: 0;
+}
+
+/* ==========================================================
+   PANTALLAS DE AUTENTICACIÓN
+========================================================== */
 
 .login-page {
-    margin: 0;
     min-height: 100vh;
     background-color: #eef2f7;
 }
 
 .login-container {
-    min-height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     padding: 20px;
 }
 
 .login-card {
     width: 100%;
-    max-width: 420px;
-    background-color: white;
+    max-width: 520px;
     padding: 40px;
+    background-color: white;
     border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .login-title {
@@ -113,10 +533,144 @@ body {
     font-weight: 600;
 }
 
-.login-card .form-control {
-    padding: 11px 12px;
+/* ==========================================================
+   TABLETA Y COMPUTADOR
+========================================================== */
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .col-md-3 {
+        width: 25%;
+    }
+
+    .col-md-6,
+    .col-lg-6 {
+        width: 50%;
+    }
 }
 
-.login-card .btn-primary {
-    padding: 11px;
+/* ==========================================================
+   TABLETA VERTICAL Y TELÉFONO
+========================================================== */
+
+@media (max-width: 767px) {
+    .min-vh-100.d-flex {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .sidebar-title {
+        padding: 18px;
+        font-size: 21px;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+        margin: 0;
+        padding: 10px;
+    }
+
+    .sidebar-menu a {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        border-radius: 4px;
+    }
+
+    .main-content {
+        width: 100%;
+    }
+
+    .topbar {
+        gap: 12px;
+        padding: 14px 18px;
+    }
+
+    .content-wrapper {
+        padding: 18px;
+    }
+
+    .d-flex.justify-content-between {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .card-body {
+        padding: 14px;
+    }
+
+    .btn {
+        margin-bottom: 4px;
+    }
+
+    .login-card {
+        max-width: 100%;
+        padding: 26px 22px;
+    }
+}
+
+/* ==========================================================
+   TELÉFONOS PEQUEÑOS
+========================================================== */
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
+    .sidebar-menu {
+        display: block;
+    }
+
+    .sidebar-menu a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .topbar > .d-flex {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .content-wrapper {
+        padding: 14px;
+    }
+
+    .content-wrapper h2 {
+        font-size: 1.65rem;
+    }
+
+    .row {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .col-md-3,
+    .col-md-6,
+    .col-lg-6 {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .login-container {
+        padding: 12px;
+    }
+
+    .login-card {
+        padding: 24px 18px;
+    }
 }
