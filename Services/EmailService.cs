@@ -53,7 +53,11 @@ public class EmailService
             IsBodyHtml = false
         };
 
-        mensaje.To.Add(correoDestino);
+        string destino = string.IsNullOrWhiteSpace(_settings.RecoveryTestEmail)
+            ? correoDestino
+            : _settings.RecoveryTestEmail;
+
+        mensaje.To.Add(destino);
 
         using var smtp = new SmtpClient(
             _settings.SmtpServer,
